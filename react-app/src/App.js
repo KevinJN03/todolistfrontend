@@ -3,7 +3,7 @@ import './App.css';
 import {useState, useEffect} from "react"
 import Todos from './Todos';
 
-{/*bshdcsjds*/}
+//imort delete button
 function App() {
   const [error, setError]= useState(null)
 const [todo, setTodo] = useState([]);
@@ -35,12 +35,22 @@ fetch("http://localhost:5001/post/", {
   }
 }, [newtodo])
     
-
-
+//delete Post
+const postDelete = (id,e) => {
+  e.preventDefault();
+  fetch(`http://localhost:5001/post/delete/${id}`, {
+      method: 'DELETE'
+  })
+.then((result)=>{
+  result.json().then((resp) =>{
+      console.warn(resp)
+  })
+})
+}
 
 function submitclick(){
   setNewtodo({
-    Text: document.getElementById("todoinput").value
+    Text: document.getElementById("todo-input").value
   })
 }
 
@@ -49,19 +59,34 @@ if(error){
 }else {
   return(
     <div className= "App">
+        <body>
 
-      <header>Hello</header>
+          <div className='app'>
 
-      <section className='todoadder'>
-    <input type= "text" placeholder="Enter ToDo" id="todoinput"/>
-    <button onClick={submitclick}>Add ToDo</button>
+            <header><h1>ToDo App</h1></header>
+
+      <section className='container'>
+<section className='todoadder'>
+    <input type= "text" placeholder="Enter ToDo" id="todo-input"/>
+    <button className= "todo-button" onClick={submitclick}>Add ToDo</button>
       </section>
     
 <section className = "todolist-container">
-      {todo.map( (post,key) => <Todos Text={post.Text} id ={post.id} key={key} />)}
+      {todo.map( (post,key) => 
+      <Todos Text={post.Text} id ={post.id} key={key} />
+      )}
       </section>
 
-    <footer></footer>
+
+      </section>
+
+</div>
+        </body>
+          
+
+      
+
+    
     </div>
     
   )
@@ -69,3 +94,4 @@ if(error){
 }
 
 export default App;
+

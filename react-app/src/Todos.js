@@ -1,13 +1,17 @@
+import {useState, useEffect} from "react"
 
- function Removetodo(id) {
+
+/*function postDelete(id) {
+
     fetch(`http://localhost:5001/post/delete/${id}`, {
         method: 'DELETE'
     })
-    .then(res => res.json())
-.then((res) => {
-  console.log(res)
+.then((result)=>{
+    result.json().then((resp) =>{
+        console.warn(resp)
+    })
 })
- }
+ }*/
 
 
 
@@ -16,8 +20,7 @@ return(
 <section className= "text-container">
     <h2>{Text}</h2>
     <h3>{id}</h3>
-    {<button onClick={Removetodo}>delete</button>}
-    <button>update</button>
+    <button className = "deletebutton">delete</button>
 </section>
 
 )
